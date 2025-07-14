@@ -1,0 +1,77 @@
+🔍 Cross-Camera Player Re-Identification – Brief Report
+🎯 Objective
+To achieve consistent player ID assignment across two different camera views (broadcast and tacticam) in a sports match scenario, using object detection and appearance-based feature matching.
+
+🧭 Approach and Methodology
+1. Player Detection (YOLOv11)
+Utilized YOLOv11 for high-accuracy player detection in both video feeds.
+
+The model was fine-tuned or used directly with pretrained weights on sports footage to detect players per frame.
+
+Each player detection yielded a bounding box and confidence score.
+
+2. Feature Extraction
+Extracted both spatial and appearance features for each player:
+
+Bounding box coordinates: (x1, y1, x2, y2)
+
+Area-based descriptor: area = (x2 - x1) * (y2 - y1)
+
+ResNet18 embeddings: Captured visual appearance features using a pretrained CNN.
+
+These features were combined into a feature vector used for matching.
+
+3. Enhanced Tracking Algorithm
+Designed a custom tracker EnhancedTracker that performs:
+
+Cosine similarity between ResNet18 embeddings
+
+Bounding box overlap (IoU) and centroid distance
+
+ID propagation over frames and across camera domains
+
+This helped assign and maintain consistent player IDs across both broadcast.mp4 and tacticam.mp4.
+
+4. Cross-Camera Mapping
+Players detected in both feeds were compared across corresponding timestamps.
+
+Players with high feature similarity (appearance + size) were assigned the same ID in both videos.
+
+In case of ambiguity (e.g., occlusions or overlapping players), appearance features were weighted higher than location.
+
+🧪 Techniques Tried
+Technique	Used?	Description
+YOLOv11	✅	Fast object detection
+ResNet18 Embeddings	✅	Lightweight visual descriptor
+Intersection over Union (IoU)	✅	Used in tracking to compare bboxes
+Kalman Filter	⛔	Considered for temporal smoothing but not implemented
+DeepSORT	⛔	Considered but avoided for simplicity
+Cosine Similarity	✅	Key technique for feature matching across cameras
+
+⚠️ Challenges Encountered
+1. Cross-Camera Variation
+Players may appear at different angles and scales across cameras.
+
+Visual appearance differs due to lighting, camera resolution, and motion blur.
+
+Solution: Relied more heavily on ResNet-based embeddings than spatial info alone.
+
+2. ID Switches in Close Proximity
+When players are closely packed or occluded, tracker may confuse them.
+
+Solution: Introduced an appearance similarity threshold to prevent false matching.
+
+3. Frame Alignment
+The two camera feeds are not perfectly synchronized in time.
+
+Solution: Processed both videos independently and applied matching heuristics based on proximity in time and feature similarity.
+
+📊 Outcome
+Players were successfully tracked and assigned consistent IDs in both views.
+
+Output videos with IDs were generated, visually confirming ID consistency.
+
+Evaluation metrics (Re-ID accuracy and ID switches) showed promising results on test data.
+
+📌 Conclusion
+The combination of YOLOv11 detection, ResNet18 embeddings, and a custom enhanced tracker proved effective for cross-camera player re-identification. While further improvements can be made using temporal models and multi-frame smoothing, the current pipeline is efficient, modular, and scalable to different sports footage.
