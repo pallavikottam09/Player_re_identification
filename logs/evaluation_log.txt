@@ -1,0 +1,8 @@
+2025-07-14 11:01:03,428 - __main__ - INFO - Starting evaluation
+2025-07-14 11:01:03,428 - __main__ - INFO - Starting evaluation
+2025-07-14 11:01:03,428 - __main__ - INFO - Parsing detection and tracking logs
+2025-07-14 11:01:03,428 - __main__ - INFO - Parsing detection and tracking logs
+2025-07-14 11:01:05,410 - __main__ - INFO - Calculated FPS: 16.18 from 10307 valid time differences
+2025-07-14 11:01:05,410 - __main__ - INFO - Calculated FPS: 16.18 from 10307 valid time differences
+2025-07-14 11:01:05,412 - __main__ - INFO - Writing evaluation report
+2025-07-14 11:01:05,412 - __main__ - INFO - Writing evaluation report

@@ -1,0 +1,41 @@
+Evaluation Report
+================
+Date: 2025-07-14 11:01:05
+Video: 15sec_input_720p.mp4
+Model: best.pt
+Output: output/output.mp4
+
+1. Detection Accuracy
+- Ball: 0.46 ± 0.57 objects/frame (Target: ~1)
+- Goalkeeper: 0.17 ± 0.37 objects/frame (Target: ~1)
+- Player: 12.77 ± 2.69 objects/frame (Target: ~16)
+- Referee: 0.82 ± 1.00 objects/frame (Target: ~2)
+- Status: Fail
+
+2. ID Switches
+- Ball: 90 (Target: <2)
+- Goalkeeper: 101 (Target: <2)
+- Player: 38 (Target: <5)
+- Referee: 99 (Target: <2)
+- Status: Fail
+
+3. Re-Identification Success
+- Ball: 71.17% (232/326) (Target: >80%)
+- Goalkeeper: 85.48% (106/124) (Target: >80%)
+- Player: 96.27% (9136/9490) (Target: >80%)
+- Referee: 95.89% (560/584) (Target: >80%)
+- Status: Fail
+
+4. Efficiency
+- FPS: 16.18 (Target: ~17)
+- Status: Pass
+
+5. ID Assignment
+- Total IDs: 316 (Ball: 280, Goalkeeper: 256, Player: 316, Referee: 145)
+- Target: ~20 (Ball: ~1, Goalkeeper: ~1, Player: ~16, Referee: ~2)
+- Status: Fail
+
+6. Visual Check
+- Inspect output/output.mp4 at frames 210–229 (~8.4–9.2s).
+- Verify: Red boxes for ball, yellow for goalkeeper, green for players, blue for referee.
+- Check: Stable IDs during re-entry (e.g., goal event).
